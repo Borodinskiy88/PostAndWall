@@ -1,14 +1,6 @@
 package ru.netology
 
 /*
-Наконец мы добрались до ООП и можем уже не только решать вычислительные задачи,
-но и моделировать целые системы.
-
-На лекции мы разобрали упрощённый пример того, как может выглядеть пост,
-давайте же посмотрим на то, как он выглядит на самом деле.
-Возьмите себе за правило анализировать системы, с которыми вы работаете в реальной жизни,
-и продумывать, как бы сделали вы.
-
 В качестве примера возьмём всё тот же VKontakte: https://vk.com/dev/objects/post.
 Если страница недоступна, воспользуйтесь копией из каталога assets).
 
@@ -27,5 +19,55 @@ package ru.netology
 Data класс Post (и другие классы, которые могут быть вложены в Post).
 Объект WallService, который внутри себя хранит посты в массиве.
  */
-class Main {
+fun main() {
+    val post = Post(1, 1, 1, 0,"Hello!", " ")
+    println(post.text)
+    println(post)
+}
+data class Post (
+    val id: Int,
+    val ownerId: Int,
+    val fromId: Int,
+    val date: Int,
+    val text: String,
+    val copyright: String,
+    val friendsOnly: Boolean = true,
+    val canPin: Boolean = true,
+    val canDelete: Boolean = true,
+    val canEdit: Boolean = true,
+    val isFavorite: Boolean = false,
+    var likes: Int = 0
+//    val comments: String
+        )
+
+object WallService {
+    var posts = emptyArray<Post>()
+
+    fun clear() {
+        posts = emptyArray()
+    }
+//    fun add (post: Post) : Post {
+//        posts += post
+//        return posts.last()
+//    }
+}
+
+object Comments {
+    val comments: String
+        get() {
+            TODO()
+        }
+    val commentCount: Int
+        get() {
+            TODO()
+        }
+
+}
+
+object Likes {
+    val likes: Int
+        get() {
+            TODO()
+        }
+
 }

@@ -39,4 +39,13 @@ package ru.netology
  */
 
 class Wall {
+    fun add (post: Post) : Post {
+        WallService.posts += post
+        return WallService.posts.last()
+    }
+
+    fun update (post: Post) : Boolean {
+//        TODO() перебор всех постов для поиска id
+        return true //todo
+    }
 }
