@@ -88,16 +88,14 @@ object WallService {
 
     fun add(post: Post): Post {
         posts += post.copy(id = id)
-//        id ++
+        id ++
         return posts.last()
     }
 
     fun update(post: Post): Boolean {
-        for ((index, post) in posts.withIndex()) { //перебираем наш массив
-            if (post.id == id) { //если id равны, нам нужно заменить пост в массиве
-                //обращаемся к конкретному элементу массива. post[index],
-                // туда копию текущего поста с измененным количеством лайков
-                posts[index] = post.copy(id = post.id, date = post.date)
+        for ((index, post) in posts.withIndex()) {
+            if (post.id == id) {
+                posts[index] = post.copy(ownerId = post.ownerId, date = post.date)
             } else {
                 return false
             }
