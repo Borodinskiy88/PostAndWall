@@ -82,31 +82,18 @@ class WallTest {
 
     @Test
     fun changeID() {
-        var id: Int = 0
-        val ownerId: Int = 0
-        val fromId: Int = 0
-        val date: Int = 0
-        val text: String = ""
-        val copyright: String = ""
-        val friendsOnly: Boolean = true
-        val canPin: Boolean = true
-        val canDelete: Boolean = true
-        val canEdit: Boolean = true
-        val isFavorite: Boolean = false
-        val likes: Likes
-        val comments: Comments
-
-
         val post = Post(0, 0, 0, 0, "", "",
             likes = Likes(0), comments = Comments(0))
+        val postID = post.id
+
         val addPost = WallService.add(post = Post(0, 0, 0, 0, "", "",
         likes = Likes(0), comments = Comments(0)
-        )
-        )
+        ))
+        val addPostId = addPost.id
 
-        val result = (post == addPost)
+        val result = (postID == addPostId)
 
-        assertEquals(false, false)
+        assertEquals(true, result)
 
 
 
