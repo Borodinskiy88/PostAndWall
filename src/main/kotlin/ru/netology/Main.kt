@@ -68,6 +68,18 @@ data class Comments(
 Пока у нас in-memory система — всё хранится в оперативной памяти,
 и всё работает на одной машине, этого будет достаточно.
 
+ */
+object WallService {
+    private var posts = emptyArray<Post>()
+    private var id = 0
+
+
+    fun add(post: Post): Post {
+        posts += post.copy(id = id)
+        id ++
+        return posts.last()
+    }
+/*
 Обновление записи
 Метод для создания записи должен выглядеть вот так:
 
@@ -81,17 +93,6 @@ data class Comments(
 Если пост с таким id не найден, то ничего не происходит и возвращается false,
 в противном случае - возвращается true.
  */
-object WallService {
-    private var posts = emptyArray<Post>()
-    private var id = 0
-
-
-    fun add(post: Post): Post {
-        posts += post.copy(id = id)
-        id ++
-        return posts.last()
-    }
-
     fun update(post: Post): Boolean {
         for ((index, post) in posts.withIndex()) {
             if (post.id == id) {
