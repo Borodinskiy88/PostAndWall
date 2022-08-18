@@ -20,12 +20,12 @@ fun main() {
         )
     )
 
-//    println(post)
+    println(post)
 //    println(post2)
 //    println(post3)
-//    println(WallService.add(post))
-//    println(WallService.update(post))
-//    println(WallService.add(post))
+    println(WallService.add(post))
+    println(WallService.update(post))
+    println(WallService.add(post))
 
 }
 
@@ -45,6 +45,7 @@ data class Post(
     val likes: Likes,
     val comments: Comments
 )
+
 data class Likes(
     val count: Int,
     val userLikes: Boolean = false,
@@ -112,7 +113,15 @@ object WallService {
     Если пост с таким id не найден, то ничего не происходит и возвращается false,
     в противном случае - возвращается true.
      */
+    fun update(post: Post): Boolean {
+        for ((index, post) in posts.withIndex()) {
+            if (post.id == id) {
+                posts[index] = post.copy(ownerId = post.ownerId, date = post.date)
 
+            } else { return false }
+        }
+        return true
+    }
 
 
     fun clear() {
