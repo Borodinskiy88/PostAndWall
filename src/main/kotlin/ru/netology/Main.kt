@@ -93,7 +93,7 @@ object WallService {
 
 
     fun add(post: Post): Post {
-        id++
+//        id++
         posts += post.copy(id = id)
         return posts.last()
     }
@@ -114,9 +114,18 @@ object WallService {
     в противном случае - возвращается true.
      */
     fun update(post: Post): Boolean {
-        for ((index, post) in posts.withIndex()) {
+        for ((index, value ) in posts.withIndex()) {
             if (post.id == id) {
-                posts[index] = post.copy(ownerId = post.ownerId, date = post.date)
+                posts[index] = post.copy(
+                    id = id,
+                    [index] = value.ownerId,
+                    fromId = value.fromId,
+                    date = post.date,
+                    text = value.text,
+                    copyright = value.copyright,
+                    likes = value.likes,
+                    comments = value.comments
+                )
 
             } else { return false }
         }
