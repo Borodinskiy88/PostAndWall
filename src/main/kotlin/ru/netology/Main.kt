@@ -2,18 +2,36 @@ package ru.netology
 
 fun main() {
     val post = Post(
-        1, 1, 1, 10, "Hello!", " ",
+        0, 1, 1, 10, "Hello!", " ",
         likes = Likes(120), comments = Comments(12)
     )
 
-    println(post.likes)
-    println(post.comments)
-    println(post)
+    val post2 = WallService.add(
+        post = Post(
+            0, 2, 2, 30,
+            "Bye", "No", likes = Likes(100), comments = Comments(15)
+        )
+    )
+
+    val post3 = WallService.add(
+        post = Post(
+            0, 45, 3, 50,
+            "Hi", "", likes = Likes(300), comments = Comments(47)
+        )
+    )
+
+//    println(post)
+//    println(post2)
+//    println(post3)
+//    println(WallService.add(post))
+//    println(WallService.update(post))
+//    println(WallService.add(post))
 
 }
 
+
 data class Post(
-    val id: Int,
+    var id: Int,
     val ownerId: Int,
     val fromId: Int,
     val date: Int,
@@ -27,7 +45,6 @@ data class Post(
     val likes: Likes,
     val comments: Comments
 )
-
 data class Likes(
     val count: Int,
     val userLikes: Boolean = false,
@@ -75,34 +92,27 @@ object WallService {
 
 
     fun add(post: Post): Post {
+        id++
         posts += post.copy(id = id)
-        id ++
         return posts.last()
     }
-/*
-Обновление записи
-Метод для создания записи должен выглядеть вот так:
 
-    fun update(post: Post): Boolean {
-        TODO()
-    }
-Как он должен работать:
 
-Он должен находить среди всех постов запись с тем же id,
-что и у post и обновлять все свойства, кроме id владельца и даты создания.
-Если пост с таким id не найден, то ничего не происходит и возвращается false,
-в противном случае - возвращается true.
- */
-    fun update(post: Post): Boolean {
-        for ((index, post) in posts.withIndex()) {
-            if (post.id == id) {
-                posts[index] = post.copy(ownerId = post.ownerId, date = post.date)
-            } else {
-                return false
-            }
+    /*
+    Обновление записи
+    Метод для создания записи должен выглядеть вот так:
+
+        fun update(post: Post): Boolean {
+            TODO()
         }
-        return true
-    }
+    Как он должен работать:
+
+    Он должен находить среди всех постов запись с тем же id,
+    что и у post и обновлять все свойства, кроме id владельца и даты создания.
+    Если пост с таким id не найден, то ничего не происходит и возвращается false,
+    в противном случае - возвращается true.
+     */
+
 
 
     fun clear() {
