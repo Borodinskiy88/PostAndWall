@@ -1,5 +1,9 @@
+package ru.netology
+
+import junit.framework.TestCase.assertEquals
+import org.junit.Test
+
 /*
-Куда же без автотестов? Правильно, никуда. Нужно написать автотесты на ваши методы:
 
 на add - всего один, который проверяет, что после добавления поста id стал отличным от 0.
 на update - целых два:
@@ -78,4 +82,43 @@ class WallServiceTest {
 Сборка должна быть «зелёной» — ваши тесты должны проходить.
  */
 class WallTest {
+
+    @Test
+    fun changeID() {
+        var id: Int = 0
+        val ownerId: Int = 0
+        val fromId: Int = 0
+        val date: Int = 0
+        val text: String = ""
+        val copyright: String = ""
+        val friendsOnly: Boolean = true
+        val canPin: Boolean = true
+        val canDelete: Boolean = true
+        val canEdit: Boolean = true
+        val isFavorite: Boolean = false
+        val likes: Likes
+        val comments: Comments
+
+
+        val post = Post(0, 0, 0, 0, "", "",
+            likes = Likes(0), comments = Comments(0))
+        val addPost = WallService.add(post = Post(0, 0, 0, 0, "", "",
+        likes = Likes(0), comments = Comments(0)
+        )
+        )
+
+        val result = (post == addPost)
+
+        assertEquals(false, false)
+
+
+
+
+
+
+    }
+
+
+
+
 }

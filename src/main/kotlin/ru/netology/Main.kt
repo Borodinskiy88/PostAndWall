@@ -8,8 +8,8 @@ fun main() {
 
     val post2 = WallService.add(
         post = Post(
-            0, 2, 2, 30,
-            "Bye", "No", likes = Likes(100), comments = Comments(15)
+            0, 2, 2, 30, "Bye", "No",
+            false, likes = Likes(500, true), comments = Comments(45)
         )
     )
 
@@ -19,7 +19,6 @@ fun main() {
     println(WallService.add(post))
 
 }
-
 
 data class Post(
     var id: Int,
@@ -36,7 +35,6 @@ data class Post(
     val likes: Likes,
     val comments: Comments
 )
-
 data class Likes(
     val count: Int,
     val userLikes: Boolean = false,
@@ -73,6 +71,11 @@ object WallService {
                     date = post.date,
                     text = newPost.text,
                     copyright = newPost.copyright,
+                    friendsOnly = newPost.friendsOnly,
+                    canPin = newPost.canPin,
+                    canDelete = newPost.canDelete,
+                    canEdit = newPost.canEdit,
+                    isFavorite = newPost.isFavorite,
                     likes = newPost.likes,
                     comments = newPost.comments
                 )
@@ -83,7 +86,6 @@ object WallService {
         }
         return true
     }
-
 
     fun clear() {
         posts = emptyArray()
