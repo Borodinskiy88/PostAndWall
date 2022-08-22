@@ -48,14 +48,14 @@ class WallServiceTest() {
             0, 0, 0, 0, "1", "", likes = Likes(0),
             comments = Comments(0)))
         service.add(post = Post(
-            1, 22, 22, 22, "2", "", likes = Likes(22),
+            0, 22, 22, 22, "2", "", likes = Likes(22),
             comments = Comments(22)))
         service.add(post = Post(
-            2, 33, 33, 33, "3", "", likes = Likes(33),
+            0, 33, 33, 33, "3", "", likes = Likes(33),
             comments = Comments(33)))
 
         val update = Post(
-            1, 111, 111, 111, "111", "212", likes = Likes(234),
+            0, 111, 111, 111, "111", "212", likes = Likes(234),
             comments = Comments(457))
 
         val result = service.update(update)
