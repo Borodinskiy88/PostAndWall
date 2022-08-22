@@ -1,21 +1,15 @@
 package ru.netology
 
 fun main() {
-    val post = WallService.add(post = Post(
-        0, 1, 1, 10, "Hello!", "Yes",
-        likes = Likes(120), comments = Comments(12))
-    )
+    val post = WallService.add(post = Post(0, 5, 5, 50, "Hello", "No",
+    likes = Likes(35), comments = Comments(45)))
 
-    val post2 = WallService.add(
-        post = Post(
-            0, 2, 2, 30, "Bye", "No",
-            false, likes = Likes(500, true), comments = Comments(45)
+    val post2 = WallService.update(
+        newPost = Post(0, 3, 3, 40, "Hi", "Maybe",
+        likes = Likes(23), comments = Comments(32)
         )
     )
 
-
-
-    println(post)
     println(post2)
 
 
@@ -64,27 +58,16 @@ object WallService {
 
     fun update(newPost: Post): Boolean {
         for ((index, post ) in posts.withIndex()) {
-            if (post.id == id) {
-                posts[index] = post.copy(
-                    id = id,
+            if (post.id == newPost.id) {
+                posts[index] = newPost.copy(
                     ownerId = post.ownerId,
-                    37,
-                    date = post.date,
-                    "Hi",
-                    "Maybe",
-                    true,
-                    likes = Likes(25),
-                    comments = Comments(32)
-
+                    date = post.date
                 )
-
-            } else {
-                return false
+                return true
             }
         }
-        return true
+        return false
     }
-
     fun clear() {
         posts = emptyArray()
     }

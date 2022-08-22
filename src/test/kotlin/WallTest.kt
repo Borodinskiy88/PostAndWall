@@ -5,6 +5,10 @@ import org.junit.Before
 import org.junit.Test
 
 class WallTest {
+    @Before
+    fun clearBeforeTest() {
+        WallService.clear()
+    }
 
     @Test
     fun addChangeID() {
