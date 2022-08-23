@@ -34,7 +34,7 @@ data class Post(
     val copyright: String?,
     val replyOwnerId: Int?,
     val replyPostId: Int?,
-    val friendsOnly: Boolean = true,
+    val friendsOnly: Boolean = false,
     val canPin: Boolean = true,
     val canDelete: Boolean = true,
     val canEdit: Boolean = true,

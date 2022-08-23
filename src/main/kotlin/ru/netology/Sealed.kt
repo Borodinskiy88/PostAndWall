@@ -57,7 +57,6 @@
 //    val photo130: String = "130",
 //    val photo604: String = "604"
 //)
-//
 //data class Event(
 //    val id: Int,
 //    val time: Int,
