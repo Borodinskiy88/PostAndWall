@@ -1,7 +1,5 @@
 package ru.netology
 
-import java.lang.reflect.Array
-
 fun main() {
     val post = WallService.add(
         post = Post(
@@ -47,14 +45,12 @@ data class Post(
     val postType: String = "post",
     val geo: Geo?,
     val signerId: Int = 0,
-    val copyHistory: Array? = null,
     val isPinned: Boolean = false,
     val markedAsAds: Boolean = false,
     val postponedId: Int = 0,
-    val postSource: PostSource
-
-
-)
+    val postSource: PostSource,
+    val attachments: Array<Attachment> = emptyArray()
+    )
 
 data class Likes(
     val count: Int,
@@ -127,9 +123,3 @@ object WallService {
 
     }
 }
-
-
-
-
-
-
