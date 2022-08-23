@@ -49,7 +49,6 @@ data class Post(
     val markedAsAds: Boolean = false,
     val postponedId: Int = 0,
     val postSource: PostSource,
-    val attachments: Array<Attachment> = emptyArray()
     )
 
 data class Likes(
