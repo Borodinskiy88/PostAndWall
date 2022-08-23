@@ -5,7 +5,8 @@ fun main() {
         post = Post(
             0, 5, 5, 50, 12, "No", "No", 5, 5,
             likes = Likes(35), comments = Comments(45), views = Views(), repost = Repost(),
-            geo = Geo(place = Place()), postSource = PostSource()
+            geo = Geo(place = Place()), postSource = PostSource(),
+            attachment = arrayOf(PostedPhotoAttachment(PostedPhoto(12, 21)))
         )
     )
 
@@ -49,7 +50,8 @@ data class Post(
     val markedAsAds: Boolean = false,
     val postponedId: Int = 0,
     val postSource: PostSource,
-    )
+    val attachment: Array<Attachment> = emptyArray()
+)
 
 data class Likes(
     val count: Int,
