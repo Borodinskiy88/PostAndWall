@@ -4,7 +4,7 @@ fun main() {
     val post = WallService.add(
         post = Post(
             0, 5, 5, 50, 12, "No", "No", 5, 5,
-            likes = Likes(35), comments = Comments(45), views = Views(), repost = Repost(),
+            likes = Likes(35), commentsPost = CommentsPost(45), views = Views(), repost = Repost(),
             geo = Geo(place = Place()), postSource = PostSource(),
             attachment = arrayOf(PostedPhotoAttachment(PostedPhoto(12, 21)))
         )
@@ -13,7 +13,7 @@ fun main() {
     val post2 = WallService.update(
         newPost = Post(
             0, 3, 3, 40, 23, "Maybe", "Yes", 0, 0,
-            likes = Likes(23), comments = Comments(32), views = Views(), repost = Repost(),
+            likes = Likes(23), commentsPost = CommentsPost(32), views = Views(), repost = Repost(),
             geo = Geo(place = Place()), postSource = PostSource()
         )
     )
@@ -41,7 +41,7 @@ data class Post(
     val isFavorite: Boolean = false,
     val likes: Likes,
     val repost: Repost,
-    val comments: Comments,
+    val commentsPost: CommentsPost,
     val views: Views,
     val postType: String = "post",
     val geo: Geo?,
@@ -60,7 +60,7 @@ data class Likes(
     val canPublish: Boolean = true
 )
 
-data class Comments(
+data class CommentsPost(
     val count: Int,
     val canPost: Boolean = true,
     val groupCanPost: Boolean = false,
@@ -93,34 +93,3 @@ data class PostSource(
     val data: String = "likes",
     val url: String? = "www"
 )
-
-object WallService {
-    private var posts = emptyArray<Post>()
-    private var id = 0
-
-
-    fun add(post: Post): Post {
-        posts += post.copy(id = id)
-        id++
-        return posts.last()
-    }
-
-    fun update(newPost: Post): Boolean {
-        for ((index, post) in posts.withIndex()) {
-            if (post.id == newPost.id) {
-                posts[index] = newPost.copy(
-                    ownerId = post.ownerId,
-                    date = post.date
-                )
-                return true
-            }
-        }
-        return false
-    }
-
-    fun clear() {
-        posts = emptyArray()
-        id = 0
-
-    }
-}
