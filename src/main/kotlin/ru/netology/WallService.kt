@@ -1,6 +1,6 @@
 package ru.netology
 
-class PostNotFoundException(message: String) : RuntimeException(message)
+class PostNotFoundException(message : String) : RuntimeException(message)
 
 object WallService {
     private var posts = emptyArray<Post>()
@@ -15,15 +15,18 @@ object WallService {
     }
 
 
-
-    fun createComment(postId: Int, comment: Comment): Comment {
+    fun createComment(id: Int, comment: Comment): Comment {
         for (post in posts) {
-            if (post.id == postId) {
+            if (post.id == id) {
                 comments += comment
                 return comments.last()
             }
         }
-        return throw PostNotFoundException("No post")
+        return throw PostNotFoundException("Post not found")
+    }
+
+    fun lastComment(): Comment {
+        return comments.last()
     }
 
 

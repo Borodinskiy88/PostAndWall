@@ -18,8 +18,13 @@ fun main() {
         )
     )
 
+    val post3 = WallService.createComment(0,
+        comment = Comment(0, 0, 0, "", donut = Donut(false, ""),
+           thread = ru.netology.Thread(1)))
+
     println(post2)
     println(post)
+    println(post3)
 
 
 }
@@ -52,6 +57,7 @@ data class Post(
     val postSource: PostSource,
     val attachment: Array<Attachment> = emptyArray()
 )
+
 
 data class Likes(
     val count: Int,
