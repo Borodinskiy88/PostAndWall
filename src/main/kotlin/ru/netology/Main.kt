@@ -18,13 +18,22 @@ fun main() {
         )
     )
 
-    val post3 = WallService.createComment(0,
-        comment = Comment(0, 0, 0, "", donut = Donut(false, ""),
-           thread = ru.netology.Thread(1)))
+    val createComment = WallService.createComment(
+        0,
+        comment = Comment(
+            9, 0, 0, "", donut = Donut(false, ""),
+            thread = ru.netology.Thread(1)
+        )
+    )
+
+    val reportComment = WallService.addReportComments(9, reportComment = ReportComment(1, 1, 8))
+
+
 
     println(post2)
     println(post)
-    println(post3)
+    println(createComment)
+    println(reportComment)
 
 
 }
