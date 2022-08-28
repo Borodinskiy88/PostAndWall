@@ -4,7 +4,6 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-
 class WallTest {
     @Before
     fun clearBeforeTest() {
@@ -12,10 +11,13 @@ class WallTest {
     }
 
     @Test(expected = PostNotFoundException::class)
-    fun shouldThrow() {
-        val newComment = WallService.createComment(0,
-            comment = Comment(0, 0, 0, "", donut = Donut(false, ""),
-                thread = Thread(1))
+    fun createCommentTestExcept() {
+        val newComment = WallService.createComment(
+            0,
+            comment = Comment(
+                0, 0, 0, "", donut = Donut(false, ""),
+                thread = Thread(1)
+            )
         )
     }
 
@@ -24,31 +26,38 @@ class WallTest {
         val service = WallService
 
         val post1 = service.add(
-            post = Post(0, 0, 0, 0, 0, "", "", 0, 0,
-            likes = Likes(1), commentsPost = CommentsPost(0),
-            views = Views(0), repost = Repost(0), geo = Geo(place = Place()), postSource = PostSource()
+            post = Post(
+                0, 0, 0, 0, 0, "", "", 0, 0,
+                likes = Likes(1), commentsPost = CommentsPost(0),
+                views = Views(0), repost = Repost(0), geo = Geo(place = Place()), postSource = PostSource()
             )
         )
 
         val post2 = service.add(
-            post = Post (1, 0, 0, 0, 0, "", "", 0,0,
-            likes = Likes(1), commentsPost = CommentsPost(0),
-            views = Views(0), repost = Repost(0), geo = Geo(place = Place()), postSource = PostSource()
-        ))
+            post = Post(
+                1, 0, 0, 0, 0, "", "", 0, 0,
+                likes = Likes(1), commentsPost = CommentsPost(0),
+                views = Views(0), repost = Repost(0), geo = Geo(place = Place()), postSource = PostSource()
+            )
+        )
 
-        var create = service.createComment(0, comment = Comment(1, 0, 1, "", donut = Donut(false, ""),
-        0, 0, thread = Thread(12)))
-
+        var create = service.createComment(
+            0,
+            comment = Comment(
+                1, 0, 1, "",
+                donut = Donut(false, ""),
+                0, 0, thread = Thread(12)
+            )
+        )
 
         val result = create == WallService.lastComment()
 
         assertEquals(true, result)
 
-
     }
 
     @Test
-    fun addChangeID() {
+    fun addChangeIDTest() {
 
         val addPost = WallService.add(
             post = Post(
@@ -68,13 +77,12 @@ class WallTest {
 
         val result = addPost2.id
 
-
         assertEquals(1, result)
 
     }
 
     @Test
-    fun updateExistId() {
+    fun updateExistIdTest() {
 
         val service = WallService
 
@@ -113,7 +121,7 @@ class WallTest {
     }
 
     @Test
-    fun updateNonExistId() {
+    fun updateNonExistIdTest() {
         val service = WallService
 
         service.add(
@@ -147,6 +155,43 @@ class WallTest {
         val result = service.update(update)
 
         assertEquals(false, result)
+
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun addReportCommentExceptionTest() {
+        val commentException = WallService.addReportComments(
+            55,
+            reportComment = ReportComment(1, 1, 1)
+        )
+    }
+
+    @Test()
+    fun addReportCommentTest() {
+
+        val post = WallService.add(
+            post = Post(
+                0, 5, 5, 50, 12, "No", "No", 5, 5,
+                likes = Likes(35), commentsPost = CommentsPost(45), views = Views(), repost = Repost(),
+                geo = Geo(place = Place()), postSource = PostSource(),
+                attachment = arrayOf(PostedPhotoAttachment(PostedPhoto(12, 21)))
+            )
+        )
+
+        val createComment = WallService.createComment(
+            0,
+            comment = Comment(
+                9, 0, 0, "", donut = Donut(false, ""),
+                thread = ru.netology.Thread(1)
+            )
+        )
+
+        val result = WallService.addReportComments(
+            9,
+            reportComment = ReportComment(1, 1, 8)
+        )
+
+        assertEquals(true, result)
 
     }
 }
