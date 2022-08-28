@@ -4,10 +4,47 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
 
+
 class WallTest {
     @Before
     fun clearBeforeTest() {
         WallService.clear()
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun shouldThrow() {
+        val newComment = WallService.createComment(0,
+            comment = Comment(0, 0, 0, "", donut = Donut(false, ""),
+                thread = Thread(1))
+        )
+    }
+
+    @Test()
+    fun createCommentTest() {
+        val service = WallService
+
+        val post1 = service.add(
+            post = Post(0, 0, 0, 0, 0, "", "", 0, 0,
+            likes = Likes(1), commentsPost = CommentsPost(0),
+            views = Views(0), repost = Repost(0), geo = Geo(place = Place()), postSource = PostSource()
+            )
+        )
+
+        val post2 = service.add(
+            post = Post (1, 0, 0, 0, 0, "", "", 0,0,
+            likes = Likes(1), commentsPost = CommentsPost(0),
+            views = Views(0), repost = Repost(0), geo = Geo(place = Place()), postSource = PostSource()
+        ))
+
+        var create = service.createComment(0, comment = Comment(1, 0, 1, "", donut = Donut(false, ""),
+        0, 0, thread = Thread(12)))
+
+
+        val result = create == WallService.lastComment()
+
+        assertEquals(true, result)
+
+
     }
 
     @Test
@@ -34,14 +71,6 @@ class WallTest {
 
         assertEquals(1, result)
 
-    }
-
-}
-
-class WallServiceTest() {
-    @Before
-    fun clearBeforeTest() {
-        WallService.clear()
     }
 
     @Test

@@ -6,8 +6,8 @@ data class Comment(
         val date: Int,
         val text: String,
         val donut: Donut,
-        val replyToUser: Int?,
-        val replyToComment: Int?,
+        val replyToUser: Int? = 0,
+        val replyToComment: Int? = 0,
         val attachment: Array<Attachment> = emptyArray(),
         val parentsStack: Array<Int> = emptyArray(),
         val thread: Thread
