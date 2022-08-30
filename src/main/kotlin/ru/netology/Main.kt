@@ -33,10 +33,46 @@ fun main() {
         9, reportComment = ReportComment(1, 1, 8))
 
 
-    println(post2)
-    println(post)
-    println(createComment)
-    println(reportComment)
+//    println(post2)
+//    println(post)
+//    println(createComment)
+//    println(reportComment)
+
+//    val note = NoteService.add(
+//        note = Notes(0, "", "", 0, "", "",
+//    0, "", 0, 0, 0)
+//    )
+
+    val note1 = NoteService.add(
+        note = Notes(0, "", "", 0, "", "",
+            0, "", 0, 0, 0
+        ))
+    val note2 = NoteService.add(
+        note = Notes(1, "", "", 0, "", "",
+            0, "", 0, 0, 0
+        ))
+
+//    val note3 = NoteService.update(newNote = Notes(1, "22", "22", 0, "", "",
+//        0, "", 0, 0, 0
+//    ))
+
+    val comment = NoteService.createComment(1, CommentNotes(guid = "HAHAHAHA"))
+//
+//    val comment2 = NoteService.createComment(0, CommentNotes(guid = "11"))
+    val delete = NoteService.deleteNotes(1)
+
+    println(note1)
+    println(note2)
+    println(delete)
+//    println(note3)
+ //   println(note2)
+    println(NoteService.getNotes())
+//    println(NoteService.getCommentNotes())
+    println(delete)
+
+    println("!!!!!!!!!")
+    println(NoteService.getBiIdNotes(0))
 
 
 }
+

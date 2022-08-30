@@ -1,7 +1,7 @@
 package ru.netology
 
 data class Notes(
-    val noteId: Int,  //Идентификатор заметки.
+    var noteId: Int,  //Идентификатор заметки.
     val title: String,
     val text: String = "text",
     val privacy: Int = 0, //Уровень доступа к заметке.
@@ -21,15 +21,16 @@ data class Notes(
     val sort: Int = 0, //Сортировка результатов (0 — по дате создания в порядке убывания, 1 - по дате создания в порядке возрастания).
     val needWiki: Boolean = false, //Определяет, требуется ли в ответе wiki-представление заметки (работает, только если запрашиваются заметки текущего пользователя).
 //    val countComment: Int = 0 //Количество комментариев, которое необходимо получить.
-    val commentNotes: CommentNotes? = null
+//    val commentNotes: CommentNotes? = null
+    val commentNotes: MutableList<CommentNotes> = NoteService.getCommentNotes()
 
 )
 
 data class CommentNotes(
+    var commentId: Int = 0, //Идентификатор комментария.
     val commentPrivacy: Int = 0, //Уровень доступа к комментированию заметки.
     val replyTo: Int = 0, //Идентификатор пользователя, ответом на комментарий которого является добавляемый комментарий
     val message: String = "message", //Текст комментария.
     val guid: String, //Уникальный идентификатор, предназначенный для предотвращения повторной отправки одинакового комментария.
-    val commentId: Int = 0, //Идентификатор комментария.
     val countComment: Int = 0 //Количество комментариев, которое необходимо получить.
 )
