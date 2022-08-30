@@ -1,7 +1,7 @@
 package ru.netology
 
-//import ru.netology.NoteService.commentNotes
-import ru.netology.NoteService.notes
+class PostNotFoundException(message: String) : RuntimeException(message)
+
 
 fun main() {
     val post = WallService.add(
@@ -38,25 +38,5 @@ fun main() {
     println(createComment)
     println(reportComment)
 
-    println( NoteService.add(Notes
-        ("", "", 1, privacyView = "", privacyComment = "", 1, 1, "",
-        commentNotes = CommentNotes(1, 1, "", ""))))
-    println( NoteService.add(Notes
-        ("", "", 1, privacyView = "", privacyComment = "", 1,1,"")
-    ))
 
-//    NoteService.deleteComment(CommentNotes(1, 1, "", ""))
-    println(NoteService.createComment(1, CommentNotes(guid = "")))
-
-    val notes = Notes("111", privacyView = "", privacyComment = "", noteIds = "")
-    println(notes)
-
-//    println(notes.size)
-//
-//    println( NoteService.notesDelete(notes[0]))
-//
-//    println(NoteService.deleteComment(commentNotes[0]))
-    println()
-//    println(notes.size)
-    println(NoteService.editComment(CommentNotes(guid = "")))
 }

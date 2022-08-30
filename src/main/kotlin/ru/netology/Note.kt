@@ -1,13 +1,14 @@
 package ru.netology
 
 data class Notes(
+    val noteId: Int,  //Идентификатор заметки.
     val title: String,
     val text: String = "text",
     val privacy: Int = 0, //Уровень доступа к заметке.
 //    val commentPrivacy: Int = 0, //Уровень доступа к комментированию заметки.
     val privacyView: String, //Настройки приватности просмотра заметки в специальном формате.
     val privacyComment: String, //Настройки приватности просмотра заметки в специальном формате.
-    val noteId: Int = 0,  //Идентификатор заметки.
+
     val ownerId: Int = 0, //Идентификатор владельца заметки.
 //    val replyTo: Int = 0, //Идентификатор пользователя, ответом на комментарий которого является добавляемый комментарий
 //    val message: String = "message", //Текст комментария.

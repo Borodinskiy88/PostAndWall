@@ -1,6 +1,5 @@
 package ru.netology
 
-class PostNotFoundException(message: String) : RuntimeException(message)
 
 object WallService : CrudService<Post, Comment> {
     private var posts = emptyArray<Post>()
