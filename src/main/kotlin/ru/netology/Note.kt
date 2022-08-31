@@ -1,38 +1,30 @@
 package ru.netology
 
 data class Notes(
-    var noteId: Int,  //Идентификатор заметки.
+    var noteId: Int,
     val title: String,
     val text: String = "text",
-    val privacy: Int = 0, //Уровень доступа к заметке.
-//    val commentPrivacy: Int = 0, //Уровень доступа к комментированию заметки.
-    val privacyView: String, //Настройки приватности просмотра заметки в специальном формате.
-    val privacyComment: String, //Настройки приватности просмотра заметки в специальном формате.
-
-    val ownerId: Int = 0, //Идентификатор владельца заметки.
-//    val replyTo: Int = 0, //Идентификатор пользователя, ответом на комментарий которого является добавляемый комментарий
-//    val message: String = "message", //Текст комментария.
-//    val guid: String, //Уникальный идентификатор, предназначенный для предотвращения повторной отправки одинакового комментария.
-//    val commentId: Int = 0, //Идентификатор комментария.
-    val noteIds: String, //Идентификаторы заметок, информацию о которых необходимо получить.
-    val userId: Int = 0, //Идентификатор пользователя, информацию о заметках которого требуется получить.
-    val offset: Int = 0, //Смещение, необходимое для выборки определенного подмножества заметок.
-    val countNote: Int = 0, //Количество заметок, информацию о которых необходимо получить.
-    val sort: Int = 0, //Сортировка результатов (0 — по дате создания в порядке убывания, 1 - по дате создания в порядке возрастания).
-    val needWiki: Boolean = false, //Определяет, требуется ли в ответе wiki-представление заметки (работает, только если запрашиваются заметки текущего пользователя).
-//    val countComment: Int = 0 //Количество комментариев, которое необходимо получить.
-//    val commentNotes: CommentNotes? = null
+    val privacy: Int = 0,
+    val privacyView: String,
+    val privacyComment: String,
+    val ownerId: Int = 0,
+    val noteIds: String,
+    val userId: Int = 0,
+    val offset: Int = 0,
+    val countNote: Int = 0,
+    val sort: Int = 0,
+    val needWiki: Boolean = false,
     val commentNotes: MutableList<CommentNotes> = NoteService.getCommentNotes()
 
 )
 
 data class CommentNotes(
-    var commentId: Int = 0, //Идентификатор комментария.
-    val commentPrivacy: Int = 0, //Уровень доступа к комментированию заметки.
-    val replyTo: Int = 0, //Идентификатор пользователя, ответом на комментарий которого является добавляемый комментарий
-    val message: String = "message", //Текст комментария.
-    val guid: String, //Уникальный идентификатор, предназначенный для предотвращения повторной отправки одинакового комментария.
-    val countComment: Int = 0, //Количество комментариев, которое необходимо получить.
+    var commentId: Int = 0,
+    val commentPrivacy: Int = 0,
+    val replyTo: Int = 0,
+    val message: String = "message",
+    val guid: String,
+    val countComment: Int = 0,
     //todo
-   // val commentDeleted: String
+    // val commentDeleted: String
 )

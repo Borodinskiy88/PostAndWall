@@ -33,15 +33,6 @@ fun main() {
         9, reportComment = ReportComment(1, 1, 8))
 
 
-    println(post2)
-    println(post)
-//    println(createComment)
-//    println(reportComment)
-
-//    val note = NoteService.add(
-//        note = Notes(0, "", "", 0, "", "",
-//    0, "", 0, 0, 0)
-//    )
 
     val note1 = NoteService.add(
         note = Notes(0, "", "", 0, "", "",
@@ -52,22 +43,28 @@ fun main() {
             0, "", 0, 0, 0
         ))
 
-//    val note3 = NoteService.update(newNote = Notes(1, "22", "22", 0, "", "",
-//        0, "", 0, 0, 0
-//    ))
+    val note3 = NoteService.update(newNote = Notes(1, "22", "22", 0, "", "",
+        0, "", 0, 0, 0
+    ))
 
     val comment = NoteService.createComment(1, CommentNotes(guid = "HAHAHAH"))
     println(comment)
 //
 //    val comment2 = NoteService.createComment(0, CommentNotes(guid = "11"))
 //    val delete = NoteService.deleteNotes(1)
-    println(NoteService.getNotes())
+    println("*************************")
+    NoteService.getNotes()
 
     val resComD = NoteService.deleteCommentNotes(0)
     println(resComD)
 
     val res = NoteService.restoreCommentNotes(0)
      println(res)
+    println("::::::::::::::")
+
+    val gCN = NoteService.getCommentNotes(1)
+
+    println(gCN)
 
 //    println(note1)
 //    println(note2)
@@ -79,7 +76,15 @@ fun main() {
 //    println(delete)
 //
 //    println("!!!!!!!!!")
-//    println(NoteService.getBiIdNotes(0))
+    println(NoteService.getBiIdNotes(1))
+
+    val ucn = NoteService.updateCommentNote(newCommentNote = CommentNotes
+        (0, 1,1, "Text", "IHIHIHI")
+    )
+
+    println(ucn)
+
+    println(NoteService.getCommentNotes(0))
 
 
 }
