@@ -4,6 +4,7 @@ package ru.netology
 object NoteService : CrudService<Notes, CommentNotes> {
     private var notes = mutableListOf<Notes>()
     private var commentNotes = mutableListOf<CommentNotes>()
+    private var commentDeleted = mutableListOf<CommentNotes>()
     private var noteId = 0
     private var commentId = 0
 
@@ -70,26 +71,26 @@ object NoteService : CrudService<Notes, CommentNotes> {
 //todo комменты создаются ко всем заметкам. Надо, чтоб создавались к конкретной,
 // разобраться какой вариант лучше
 
-    //    override fun createComment(noteId: Int, commentNote: CommentNotes): CommentNotes {
-//        for (note in notes) {
-//            if (note.noteId == noteId) {
-//                note.commentNotes += commentNote
-//                commentId++
-//                return commentNotes.last()
-//            }
-//        }
-//        return throw PostNotFoundException("Note $noteId not found")
-//}
-    override fun createComment(noteId: Int, commentNote: CommentNotes): CommentNotes {
-        for ((index, note) in notes.withIndex()) {
+        override fun createComment(noteId: Int, commentNote: CommentNotes): CommentNotes {
+        for (note in notes) {
             if (note.noteId == noteId) {
-                notes[index].commentNotes += commentNote
+                note.commentNotes += commentNote
                 commentId++
                 return commentNotes.last()
             }
         }
         return throw PostNotFoundException("Note $noteId not found")
-    }
+}
+//    override fun createComment(noteId: Int, commentNote: CommentNotes): CommentNotes {
+//        for ((index, note) in notes.withIndex()) {
+//            if (note.noteId == noteId) {
+//                notes[index].commentNotes += commentNote
+//                commentId++
+//                return commentNotes.last()
+//            }
+//        }
+//        return throw PostNotFoundException("Note $noteId not found")
+//    }
 
     //todo проверить, работает или нет. Возможно работает
     fun updateCommentNote(newCommentNote: CommentNotes): Boolean {
@@ -115,11 +116,12 @@ object NoteService : CrudService<Notes, CommentNotes> {
         return false
     }
 
-    //todo комменты не удаляются, а просто исчезают из показа, подумать, почитать подсказку к домашке
+    //todo работает, пока оставлю так
     fun deleteCommentNotes(commentId: Int): Boolean {
         for (commentNote in commentNotes) {
             if (commentNote.commentId == commentId) {
                 commentNotes.remove(commentNote)
+                commentDeleted.add(commentNote)
                 return true
             }
         }
@@ -132,14 +134,14 @@ object NoteService : CrudService<Notes, CommentNotes> {
     }
 
     //todo посмотреть как циклом вывести построчно, разобраться как вывести комменты конкретной заметки
-    fun getCommentNotes(index: Int, note: Notes): Any {
-        for (note in notes) {
-            if (note.commentNotes != null) return note.commentNotes
-        }
-        return "There are no comments"
-    }
+//    fun getCommentNotes(index: Int, note: Notes): Any {
+//        for (note in notes) {
+//            if (note.commentNotes > 0 != null) return note.commentNotes
+//        }
+//        return "There are no comments"
+//    }
 
-    //todo подумать, что выдавать вместо исключения, но в целом и так прокатит
+    //todo работает, пока оставлю так
     fun getBiIdNotes(noteId: Int) : Notes {
         for (note in notes) {
             if (note.noteId == noteId) {
@@ -149,20 +151,21 @@ object NoteService : CrudService<Notes, CommentNotes> {
         return throw PostNotFoundException("Notes $noteId not found")
     }
 
-    //todo чувак создал второй список, куда перемещает удаленные. Подумать
+
+    //todo работает, оставлю так
     /*
     можно также добавить к комментарию поле удален он или нет,
     тогда не придется перемещать объекты между двумя коллекциями.
      */
-//    fun restoreCommentNotes (idComment: Int): Boolean {
-//        for (deleteComment in deleteComments) {
-//            if (idComment == deleteComment.commentId) {
-//                commentNotes.add(deleteComment)
-//                return true
-//            }
-//        }
-//        return false
-//    }
+    fun restoreCommentNotes (commentId: Int): Boolean {
+        for (commentDelete in commentDeleted) {
+            if (commentId == commentDelete.commentId) {
+                commentNotes.add(commentDelete)
+                return true
+            }
+        }
+        return false
+    }
 
 
 
@@ -170,9 +173,9 @@ object NoteService : CrudService<Notes, CommentNotes> {
         return commentNotes.last()
     }
 
-    //todo разобраться как очистить коллекцию
     fun clear() {
-        notes = emptyArray<Notes>().toMutableList()
+        notes.clear()
+        commentNotes.clear()
         noteId = 0
     }
 
