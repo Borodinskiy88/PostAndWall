@@ -154,15 +154,15 @@ object NoteService : CrudService<Notes, CommentNotes> {
     можно также добавить к комментарию поле удален он или нет,
     тогда не придется перемещать объекты между двумя коллекциями.
      */
-    fun restoreCommentNotes (idComment: Int): Boolean {
-        for (deleteComment in deleteComments) {
-            if (idComment == deleteComment.commentId) {
-                commentNotes.add(deleteComment)
-                return true
-            }
-        }
-        return false
-    }
+//    fun restoreCommentNotes (idComment: Int): Boolean {
+//        for (deleteComment in deleteComments) {
+//            if (idComment == deleteComment.commentId) {
+//                commentNotes.add(deleteComment)
+//                return true
+//            }
+//        }
+//        return false
+//    }
 
 
 
