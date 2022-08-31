@@ -66,6 +66,8 @@ fun main() {
 
     println(gCN)
 
+    println(NoteService.lastComment())
+
 //    println(note1)
 //    println(note2)
 //    println(delete)
@@ -85,6 +87,7 @@ fun main() {
     println(ucn)
 
     println(NoteService.getCommentNotes(0))
+    println(NoteService.lastComment())
 
 
 }

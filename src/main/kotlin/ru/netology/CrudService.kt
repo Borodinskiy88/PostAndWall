@@ -1,6 +1,6 @@
 package ru.netology
 
-interface CrudService<A, B> {   //A - Post/Notes, B - Comment
+interface CrudService<A, B> {
 
     fun add(elem: A): A
 

@@ -125,7 +125,6 @@ object NoteService : CrudService<Notes, CommentNotes> {
         return false
     }
 
-
     fun clear() {
         notes.clear()
         commentNotes.clear()
