@@ -29,9 +29,6 @@ object NoteService : CrudService<Notes, CommentNotes> {
         return false
     }
 
-//todo комменты создаются ко всем заметкам. Надо, чтоб создавались к конкретной,
-// разобраться какой вариант лучше
-
     override fun createComment(noteId: Int, commentNote: CommentNotes): CommentNotes {
         for (note in notes) {
             if (note.noteId == noteId) {
@@ -42,16 +39,6 @@ object NoteService : CrudService<Notes, CommentNotes> {
         }
         return throw PostNotFoundException("Note $noteId not found")
     }
-//    override fun createComment(noteId: Int, commentNote: CommentNotes): CommentNotes {
-//        for ((index, note) in notes.withIndex()) {
-//            if (note.noteId == noteId) {
-//                notes[index].commentNotes += commentNote
-//                commentId++
-//                return commentNotes.last()
-//            }
-//        }
-//        return throw PostNotFoundException("Note $noteId not found")
-//    }
 
     fun updateCommentNote(newCommentNote: CommentNotes): Boolean {
         for ((index, commentNote) in commentNotes.withIndex()) {
@@ -87,26 +74,21 @@ object NoteService : CrudService<Notes, CommentNotes> {
     }
 
     fun getNotes(vararg note: Notes) {
-        for (note in notes) {
-            println("$note")
-        }
+        if (notes.isEmpty()) {
+            return throw PostNotFoundException("Note not found")
+        } else notes.forEach { println(it) }
     }
 
-
-    //todo посмотреть как циклом вывести построчно, разобраться как вывести комменты конкретной заметки
-    //вводим id заметки, ищем в коллекции нотес,
-    // если ай ди заметки совпадает с ай ди ноутс, выводим все комментарии для этого ноутс
     fun getCommentNotes(noteId: Int): MutableList<CommentNotes> {
         for ((index, note) in notes.withIndex()) {
             if (note.noteId == noteId) {
                 return notes[index].commentNotes
             }
         }
-        return mutableListOf()
-//        return throw PostNotFoundException("Notes $noteId not found")
+        return throw PostNotFoundException("Notes or comments not found")
     }
 
-    fun getBiIdNotes(noteId: Int): Notes {
+    fun getByIdNotes(noteId: Int): Notes {
         for (note in notes) {
             if (note.noteId == noteId) {
                 return note
@@ -134,7 +116,6 @@ object NoteService : CrudService<Notes, CommentNotes> {
     override fun lastComment(): CommentNotes {
         return commentNotes.last()
     }
-
 
 }
 

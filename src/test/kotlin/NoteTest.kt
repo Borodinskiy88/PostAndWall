@@ -14,10 +14,12 @@ class NoteTest {
     @Test
     fun addNoteTest() {
         val addPost = NoteService.add(
-            note = Notes(0, "", privacyView = "", privacyComment = "", noteIds = ""))
+            note = Notes(0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
 
         val addPost2 = NoteService.add(
-            note = Notes(0, "", privacyView = "", privacyComment = "", noteIds = ""))
+            note = Notes(0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
 
         val result = addPost2.noteId
 
@@ -65,8 +67,10 @@ class NoteTest {
     fun createCommentNoteTest() {
         val service = NoteService
 
-        val note = service.add(note = Notes
-            (0, "", privacyView = "", privacyComment = "", noteIds = ""))
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
 
         val create = service.createComment(0, commentNote = CommentNotes(guid = ""))
 
@@ -79,11 +83,14 @@ class NoteTest {
     fun updateExistCommentIdCommentNoteTest() {
         val service = NoteService
 
-        val note = service.add(note = Notes
-            (0, "", privacyView = "", privacyComment = "", noteIds = ""))
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = ""))
+            0, commentNote = CommentNotes(commentId = 0, guid = "")
+        )
 
         val update = CommentNotes(0, guid = "1")
 
@@ -97,11 +104,14 @@ class NoteTest {
     fun updateNonExistCommentIdCommentNoteTest() {
         val service = NoteService
 
-        val note = service.add(note = Notes
-            (0, "", privacyView = "", privacyComment = "", noteIds = ""))
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = ""))
+            0, commentNote = CommentNotes(commentId = 0, guid = "")
+        )
 
         val update = CommentNotes(5, guid = "1")
 
@@ -114,20 +124,24 @@ class NoteTest {
     fun deleteNotesTest() {
         val service = NoteService
 
-        val note = service.add(note = Notes
-            (0, "", privacyView = "", privacyComment = "", noteIds = ""))
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
 
         val result = service.deleteNotes(0)
 
-       assertEquals(true, result)
+        assertEquals(true, result)
     }
 
     @Test
     fun deleteNonExistNoteIdNotesTest() {
         val service = NoteService
 
-        val note = service.add(note = Notes
-            (0, "", privacyView = "", privacyComment = "", noteIds = ""))
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
 
         val result = service.deleteNotes(6)
 
@@ -138,11 +152,14 @@ class NoteTest {
     fun deleteCommentNotesTest() {
         val service = NoteService
 
-        val note = service.add(note = Notes
-            (0, "", privacyView = "", privacyComment = "", noteIds = ""))
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = ""))
+            0, commentNote = CommentNotes(commentId = 0, guid = "")
+        )
 
         val result = service.deleteCommentNotes(0)
 
@@ -154,11 +171,14 @@ class NoteTest {
     fun deleteCommentNonExistCommentIdNotesTest() {
         val service = NoteService
 
-        val note = service.add(note = Notes
-            (0, "", privacyView = "", privacyComment = "", noteIds = ""))
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = ""))
+            0, commentNote = CommentNotes(commentId = 0, guid = "")
+        )
 
         val result = service.deleteCommentNotes(7)
 
@@ -166,22 +186,103 @@ class NoteTest {
 
     }
 
+    @Test(expected = PostNotFoundException::class)
+    fun getNotesExceptionTest() {
+        val getNotes = NoteService.getNotes()
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun getCommentNotesExceptionTest() {
+        val getCommentNotes = NoteService.getCommentNotes(6)
+    }
+
     @Test
-    fun getNotes() {
+    fun getCommentNotesTest() {
         val service = NoteService
-        val note = service.add(note = Notes
-            (0, "", privacyView = "", privacyComment = "", noteIds = ""))
-        val result = service.getNotes()
+
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
+
+        val create = service.createComment(
+            0, commentNote = CommentNotes(commentId = 0, guid = "")
+        )
+
+        val res = service.getCommentNotes(0)
+
+        val result = res.last() == create
+
 
         assertEquals(true, result)
     }
-    @Test
-    fun getNotesEmpty() {
-        val result = NoteService.getNotes()
 
-        assertEquals(false, result)
+    @Test(expected = PostNotFoundException::class)
+    fun getByIdNotesExceptionTest() {
+        val getById = NoteService.getByIdNotes(0)
     }
 
+    @Test
+    fun getByIdNotesTest() {
+        val service = NoteService
 
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
+
+        val note2 = service.add(
+            note = Notes
+                (1, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
+
+        val get = service.getByIdNotes(0)
+
+        val result = (note == get)
+
+        assertEquals(true, result)
+    }
+
+    @Test
+    fun restoreCommentNotesTrueTest() {
+        val service = NoteService
+
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
+
+        val create = service.createComment(
+            0, commentNote = CommentNotes(commentId = 0, guid = "")
+        )
+
+        val delete = service.deleteCommentNotes(0)
+
+        val result = service.restoreCommentNotes(0)
+
+        assertEquals(true, result)
+
+    }
+
+    @Test
+    fun restoreCommentNotesFalseTest() {
+        val service = NoteService
+
+        val note = service.add(
+            note = Notes
+                (0, "", privacyView = "", privacyComment = "", noteIds = "")
+        )
+
+        val create = service.createComment(
+            0, commentNote = CommentNotes(commentId = 0, guid = "")
+        )
+
+        val delete = service.deleteCommentNotes(0)
+
+        val result = service.restoreCommentNotes(8)
+
+        assertEquals(false, result)
+
+    }
 
 }

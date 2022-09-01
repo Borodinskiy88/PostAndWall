@@ -25,6 +25,4 @@ data class CommentNotes(
     val message: String = "message",
     val guid: String,
     val countComment: Int = 0,
-    //todo
-    // val commentDeleted: String
 )
