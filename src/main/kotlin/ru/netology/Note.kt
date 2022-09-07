@@ -14,7 +14,7 @@ data class Notes(
     val countNote: Int = 0,
     val sort: Int = 0,
     val needWiki: Boolean = false,
-    val commentNotes: MutableList<CommentNotes> = NoteService.getCommentNotes()
+    val commentNotes: MutableList<CommentNotes> = NoteService.getListCommentNotes()
 
 )
 

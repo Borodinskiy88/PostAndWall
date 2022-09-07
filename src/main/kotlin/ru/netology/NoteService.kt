@@ -7,7 +7,7 @@ object NoteService : CrudService<Notes, CommentNotes> {
     private var noteId = 0
     private var commentId = 0
 
-    fun getCommentNotes(): MutableList<CommentNotes> {
+    fun getListCommentNotes(): MutableList<CommentNotes> {
         return commentNotes
     }
 
