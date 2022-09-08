@@ -72,6 +72,6 @@ fun main() {
     )
     NoteService.getNotes()
 
-    println(NoteService.getCommentNotes(0))
+    println(NoteService.getCommentNotes(1))
 }
 
