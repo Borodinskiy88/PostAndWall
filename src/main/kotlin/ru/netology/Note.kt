@@ -19,6 +19,7 @@ data class Notes(
 )
 
 data class CommentNotes(
+    var noteId: Int,
     var commentId: Int = 0,
     val commentPrivacy: Int = 0,
     val replyTo: Int = 0,

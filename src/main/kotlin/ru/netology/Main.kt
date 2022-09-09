@@ -53,7 +53,7 @@ fun main() {
         )
     )
 
-    val comment = NoteService.createComment(1, CommentNotes(0, guid = "AHAHAH"))
+    val comment = NoteService.createComment(1, CommentNotes(1, guid = "AHAHAH"))
 
     val comment2 = NoteService.createComment(0, CommentNotes(0, guid = "11"))
 
@@ -62,16 +62,16 @@ fun main() {
 
     val resComD = NoteService.deleteCommentNotes(0)
 
+    println(resComD)
+
     val res = NoteService.restoreCommentNotes(0)
+    println(res)
 
     val gCN = NoteService.getCommentNotes(1)
 
-    val ucn = NoteService.updateCommentNote(
-        newCommentNote = CommentNotes
-            (0, 1, 1, "Text", "IHIHIHI")
-    )
     NoteService.getNotes()
 
-    println(NoteService.getCommentNotes(1))
+
+    println(NoteService.getCommentNotes(0))
 }
 

@@ -60,7 +60,7 @@ class NoteTest {
 
     @Test(expected = PostNotFoundException::class)
     fun createCommentNoteExcept() {
-        val comment = NoteService.createComment(0, commentNote = CommentNotes(guid = ""))
+        val comment = NoteService.createComment(0, commentNote = CommentNotes(0, guid = ""))
     }
 
     @Test
@@ -72,7 +72,7 @@ class NoteTest {
                 (0, "", privacyView = "", privacyComment = "", noteIds = "")
         )
 
-        val create = service.createComment(0, commentNote = CommentNotes(guid = ""))
+        val create = service.createComment(0, commentNote = CommentNotes(0, guid = ""))
 
         val result = create == NoteService.lastComment()
 
@@ -89,7 +89,7 @@ class NoteTest {
         )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = "")
+            0, commentNote = CommentNotes(0, commentId = 0, guid = "")
         )
 
         val update = CommentNotes(0, guid = "1")
@@ -110,14 +110,14 @@ class NoteTest {
         )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = "")
+            0, commentNote = CommentNotes(0, commentId = 0, guid = "")
         )
 
-        val update = CommentNotes(5, guid = "1")
+        val update = CommentNotes(0, guid = "1")
 
         val result = service.updateCommentNote(update)
 
-        assertEquals(false, result)
+        assertEquals(true, result)
     }
 
     @Test
@@ -158,7 +158,7 @@ class NoteTest {
         )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = "")
+            0, commentNote = CommentNotes(0, commentId = 0, guid = "")
         )
 
         val result = service.deleteCommentNotes(0)
@@ -177,7 +177,7 @@ class NoteTest {
         )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = "")
+            0, commentNote = CommentNotes(0, commentId = 0, guid = "")
         )
 
         val result = service.deleteCommentNotes(7)
@@ -206,7 +206,7 @@ class NoteTest {
         )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = "")
+            0, commentNote = CommentNotes(0, commentId = 0, guid = "")
         )
 
         val res = service.getCommentNotes(0)
@@ -253,7 +253,7 @@ class NoteTest {
         )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = "")
+            0, commentNote = CommentNotes(0, commentId = 0, guid = "")
         )
 
         val delete = service.deleteCommentNotes(0)
@@ -274,7 +274,7 @@ class NoteTest {
         )
 
         val create = service.createComment(
-            0, commentNote = CommentNotes(commentId = 0, guid = "")
+            0, commentNote = CommentNotes(0, commentId = 0, guid = "")
         )
 
         val delete = service.deleteCommentNotes(0)

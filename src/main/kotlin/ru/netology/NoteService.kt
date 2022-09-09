@@ -82,10 +82,16 @@ object NoteService : CrudService<Notes, CommentNotes> {
     fun getCommentNotes(noteId: Int): MutableList<CommentNotes> {
         for ((index, note) in notes.withIndex()) {
             if (note.noteId == noteId) {
-                return notes[index].commentNotes
+                val comments = mutableListOf<CommentNotes>()
+                for (comment in notes[index].commentNotes) {
+                    if (comment.noteId == noteId) {
+                        comments.add(comment)
+                    }
+                }
+                return comments
             }
         }
-        return throw PostNotFoundException("Notes or comments not found")
+        throw PostNotFoundException("Notes or comments not found")
     }
 
     fun getByIdNotes(noteId: Int): Notes {
